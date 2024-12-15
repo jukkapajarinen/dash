@@ -1,23 +1,4 @@
-# Dash
-
-Sane Laravel bare-bones 2FA setup.
-
-## Commands
-
-```
-composer install;
-cp .env.example .env;
-php artisan key:generate;
-php artisan migrate;
-echo "\App\Models\User::create(['name' => 'tester', 'email' => 'tester@tester.com', 'password' => bcrypt('tester')]);" | php artisan tinker;
-php artisan serve;
-```
-
-## Author
-
-- [Jukka Pajarinen](https://www.jukkapajarinen.com)
-
-## [License](LICENSE.md)
+## License
 
 Copyright (c) 2024 Jukka Pajarinen
 
