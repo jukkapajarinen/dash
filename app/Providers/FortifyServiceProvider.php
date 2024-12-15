@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -28,8 +27,6 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
-
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
@@ -40,11 +37,7 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
 
-
-
-        Fortify::loginView(function () {
-          return view('auth.login');
-        });
+        Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
 
         Fortify::authenticateUsing(function (Request $request) {
           $user = User::where('email', $request->email)->first();
@@ -55,12 +48,16 @@ class FortifyServiceProvider extends ServiceProvider
           }
         });
 
+        Fortify::loginView(function () {
+          return view('auth.login');
+        });
+
         Fortify::twoFactorChallengeView(function () {
-          return view('auth.two-factor-challenge');
+          return view('auth.challenge');
         });
 
         Fortify::confirmPasswordView(function () {
-            return view('auth.confirm-password');
+            return view('auth.confirmation');
         });
         
     }

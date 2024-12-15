@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>MyLaravel</title>
     </head>
     <body>
       <h1>Confirm password</h1>
