@@ -1,6 +1,6 @@
 # Dash
 
-Sane Laravel bare-bones 2FA setup.
+Sane Laravel bare-bones 2FA setup. There is a login screen, 2FA challenge screen and a home screen.
 
 ## Commands
 
